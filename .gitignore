@@ -1,0 +1,6 @@
+
+# QGIS working files
+*.gpkg
+*.qmd
+*.kmz
+_rosecheck.png

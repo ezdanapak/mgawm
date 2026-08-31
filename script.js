@@ -12,8 +12,8 @@ function revealPoem() {
 }
 
 revealPoem();
-// full stanza ~5.5s in, hold, then softly cycle again
-setInterval(revealPoem, 11000);
+// full stanza reveals, holds to be read, then restarts every 110 seconds
+setInterval(revealPoem, 110000);
 
 /* ── Falling rose petals ─────────────────────────────────── */
 const canvas = document.getElementById('roseCanvas');

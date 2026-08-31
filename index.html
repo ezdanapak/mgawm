@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ka">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Falling Roses Poem</title>
+    <meta name="theme-color" content="#2a1224">
+    <title>მოდი! გეძახი ათას წლის მერე</title>
+    <meta name="description" content="გალაკტიონ ტაბიძე — ვარდის ფურცლების ცვენა">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div id="poem" class="poem"></div>
-    </div>
-    <canvas id="roseCanvas"></canvas>
+    <canvas id="roseCanvas" aria-hidden="true"></canvas>
+
+    <main class="stage">
+        <blockquote id="poem" class="poem" aria-label="ლექსი">
+            <span class="line" style="--i:0">მოდი! გეძახი ათას წლის მერე,</span>
+            <span class="line" style="--i:1">დამნაცროს ელვამ შენი ტანისა;</span>
+            <span class="line" style="--i:2">ვარდის ფურცლობის ნიშანი არი</span>
+            <span class="line" style="--i:3">და დრო ახალი პაემანისა!..</span>
+        </blockquote>
+        <footer class="sign">გალაკტიონ ტაბიძე</footer>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>

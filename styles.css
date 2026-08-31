@@ -1,42 +1,118 @@
-body {
+:root {
+    --bg-top: #3a1630;
+    --bg-mid: #5a1f3d;
+    --bg-bot: #23101f;
+    --ink: #fdeef2;
+    --ink-soft: rgba(253, 238, 242, 0.72);
+    --accent: #ff9ec4;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
     margin: 0;
-    overflow: hidden; /* Hide scrolling for falling effect */
-    font-family: Arial, sans-serif;
-    color: #fff;
+    height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: "Noto Serif Georgian", Georgia, serif;
+    color: var(--ink);
+    background:
+        radial-gradient(120% 90% at 50% 0%, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bot) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Soft vignette to focus the center */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(85% 75% at 50% 45%, transparent 60%, rgba(10, 4, 12, 0.38) 100%);
+    z-index: 1;
 }
 
 #roseCanvas {
     position: fixed;
-    top: 0;
-    left: 0;
+    inset: 0;
     width: 100%;
     height: 100%;
-    z-index: -1; /* Place behind the poem content */
+    z-index: 0;
 }
 
-.container {
-    text-align: center;
+.stage {
     position: relative;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.5); /* Dark translucent box */
-    border-radius: 15px;
-    margin: auto;
-    max-width: 80%;
-    color: #fff;
+    z-index: 2;
+    text-align: center;
+    padding: clamp(28px, 6vw, 64px);
+    max-width: min(760px, 90vw);
+    border-radius: 28px;
+    background: rgba(28, 10, 24, 0.28);
+    backdrop-filter: blur(9px) saturate(115%);
+    -webkit-backdrop-filter: blur(9px) saturate(115%);
+    border: 1px solid rgba(255, 255, 255, 0.10);
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .poem {
-    font-size: 2rem;
-    font-weight: bold;
-    line-height: 1.5;
-    animation: fadeInOut 4s infinite;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+    margin: 0;
+    font-weight: 500;
+    font-size: clamp(1.35rem, 3.6vw, 2.25rem);
+    line-height: 1.85;
+    letter-spacing: 0.2px;
+    text-wrap: balance;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .poem {
-        font-size: 1.5rem;
-    }
+.line {
+    display: block;
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(6px);
+    text-shadow: 0 2px 24px rgba(255, 120, 170, 0.35);
+    transition: opacity 1.1s ease, transform 1.1s ease, filter 1.1s ease;
+}
+
+.line.show {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+    transition-delay: calc(var(--i) * 0.9s);
+}
+
+/* First line kept slightly brighter as the invocation */
+.line:first-child {
+    color: #fff;
+    text-shadow: 0 2px 30px rgba(255, 158, 196, 0.55);
+}
+
+.sign {
+    margin-top: clamp(20px, 4vw, 34px);
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    opacity: 0;
+    transition: opacity 1.4s ease;
+    transition-delay: 4.4s;
+}
+
+.sign.show { opacity: 1; }
+.sign::before {
+    content: "";
+    display: block;
+    width: 42px;
+    height: 1px;
+    margin: 0 auto 16px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .line, .sign { transition-duration: 0.4s; }
 }
